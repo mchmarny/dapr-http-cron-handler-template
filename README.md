@@ -1,27 +1,25 @@
-# dapr-event-subscriber-template
+# dapr-http-cron-handler-template
 
-[![Test](https://github.com/mchmarny/dapr-event-subscriber-template/workflows/Test/badge.svg)](https://github.com/mchmarny/dapr-event-subscriber-template/actions?query=workflow%3ATest) ![Release](https://github.com/mchmarny/dapr-event-subscriber-template/workflows/Release/badge.svg?query=workflow%3ARelease) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/mchmarny/dapr-event-subscriber-template) [![Go Report Card](https://goreportcard.com/badge/github.com/mchmarny/dapr-event-subscriber-template)](https://goreportcard.com/report/github.com/mchmarny/dapr-event-subscriber-template)
+[![Test](https://github.com/mchmarny/dapr-http-cron-handler-template/workflows/Test/badge.svg)](https://github.com/mchmarny/dapr-http-cron-handler-template/actions?query=workflow%3ATest) ![Release](https://github.com/mchmarny/dapr-http-cron-handler-template/workflows/Release/badge.svg?query=workflow%3ARelease) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/mchmarny/dapr-http-cron-handler-template) [![Go Report Card](https://goreportcard.com/badge/github.com/mchmarny/dapr-http-cron-handler-template)](https://goreportcard.com/report/github.com/mchmarny/dapr-http-cron-handler-template)
 
-This Dapr template project accelerates the development of new Dapr services in `go`. It includes `make` commands for: 
+I use this template bootstrap new Dapr cron (schedule) handling services development in `go`. 
 
 ```shell
 $ make help
-mod             Updates the go modules and vendors all dependencies
-test            Tests the entire project
-testevent       Tests only the event handler
-run             Runs the un-compiled code
-build           Builds local release binary
-dapr            Builds binary and runs it in Dapr
-event           Publishes sample message to Dapr pubsub API
-image           Builds and publish docker image
-lint            Lints the entire project
-tag             Creates release tag
-clean           Cleans up generated files
-reset           Resets go modules
-help            Display available commands
+tidy                           Updates the go modules and vendors all dependencies
+test                           Tests the entire project
+build                          Builds local release binary
+debug                          Runs uncompiled code it in Dapr in debug mode
+run                            Builds binary and runs it in Dapr
+image                          Builds and publish docker image
+lint                           Lints the entire project
+tag                            Creates release tag
+clean                          Cleans up generated files
+reset                          Resets go modules
+help                           Display available commands
 ```
 
-This project also includes GitHub actions in [.github/workflows](.github/workflows) that test on each `push` and build images and mark release on each `tag`. Other Dapr GitHub templates to accelerate development:
+This project also includes GitHub actions in [.github/workflows](.github/workflows) that test on each `push` and build images and mark release on each `tag`. Other Dapr GitHub templates that may help you accelerate your development:
 	
 * [dapr-grpc-event-subscriber-template](https://github.com/mchmarny/dapr-grpc-event-subscriber-template)
 * [dapr-http-event-subscriber-template](https://github.com/mchmarny/dapr-event-subscriber-template)

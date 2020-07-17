@@ -1,53 +1,33 @@
 package main
 
 import (
-	"context"
-
 	"log"
 	"net/http"
-	"os"
-	"strings"
+	"time"
 
-	daprd "github.com/dapr/go-sdk/service/http"
-)
-
-var (
-	logger    = log.New(os.Stdout, "", 0)
-	address   = getEnvVar("ADDRESS", ":8080")
-	topicName = getEnvVar("TOPIC_NAME", "events")
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// create a Dapr service
-	s := daprd.NewService()
-
-	// add some topic subscriptions
-	err := s.AddTopicEventHandler("events", "/events", eventHandler)
-	if err != nil {
-		logger.Fatalf("error adding topic subscription: %v", err)
-	}
-
-	// start the service
-	if err = s.Start(address); err != nil && err != http.ErrServerClosed {
-		logger.Fatalf("error starting service: %v", err)
+	r := gin.Default()
+	r.OPTIONS("/run", optionsHandler)
+	r.POST("/run", runHandler)
+	if err := r.Run(":8080"); err != nil {
+		panic(err)
 	}
 }
 
-func eventHandler(ctx context.Context, e daprd.TopicEvent) error {
-	logger.Printf(
-		"event - Source: %s, Topic:%s, ID:%s, DataContentType:%s",
-		e.Source, e.Topic, e.ID, e.DataContentType,
-	)
-
-	// TODO: do something with the cloud event data
-	logger.Println(e.Data)
-
-	return nil
+func runHandler(c *gin.Context) {
+	// TODO: do something interesting here
+	log.Printf("schedule received: %v", time.Now())
+	c.JSON(http.StatusOK, nil)
 }
 
-func getEnvVar(key, fallbackValue string) string {
-	if val, ok := os.LookupEnv(key); ok {
-		return strings.TrimSpace(val)
-	}
-	return fallbackValue
+func optionsHandler(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "POST,OPTIONS")
+	c.Header("Access-Control-Allow-Headers", "authorization, origin, content-type, accept")
+	c.Header("Allow", "POST,OPTIONS")
+	c.Header("Content-Type", "application/json")
+	c.AbortWithStatus(http.StatusOK)
 }
