@@ -21,7 +21,7 @@ debug: ## Runs uncompiled code it in Dapr in debug mode
 	     --app-port 8080 \
 	     --components-path ./config \
 	     --log-level debug \
-	     go run *.go
+	     go run main.go
 
 run: build ## Builds binary and runs it in Dapr
 	dapr run --app-id $(SERVICE_NAME) \
