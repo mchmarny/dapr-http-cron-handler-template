@@ -37,6 +37,22 @@ This project also includes GitHub actions in [.github/workflows](.github/workflo
 * Copy all dependencies locally (`go mod vendor`)
 * Test to ensure everything is working (`make test`)
 
+To edit the binding execution schedule, update the [config/cron.yaml](config/cron.yaml) file
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: run
+spec:
+  type: bindings.cron
+  metadata:
+  - name: schedule
+    value: "@every 3s"
+```
+
+For more information about this binding see the [Dapr docs](https://github.com/dapr/docs/blob/master/reference/specs/bindings/cron.md)
+
 ### deployment files
 
 > If deploying to Kubernates you will also need to update the components and deployment files in the [deploy](deploy) directory and define your DockerHub username (`DOCKER_USER`)
