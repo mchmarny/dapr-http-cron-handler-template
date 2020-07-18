@@ -25,16 +25,12 @@ This project also includes GitHub actions in [.github/workflows](.github/workflo
 * [dapr-http-event-subscriber-template](https://github.com/mchmarny/dapr-event-subscriber-template)
 * [dapr-ui-app-template](https://github.com/mchmarny/dapr-ui-app-template)
 
-## usage 
+## template usage 
 
 * Click "Use this template" above and follow the wizard to select owner and name your new repo
-* Clone your new repo locally (`git clone git@github.com:<GITHUB-USERNAME>/<GITHUB-USERNAME>.git`)
+* Clone your new repo locally (e.g. `git clone git@github.com:<USERNAME>/<REPO-NAME>.git`)
 * Navigate to your newly cloned repo (`cd <REPO-NAME>`)
-* Cleanup old artifacts (`make reset`)
-* Init go module with your repo URL (`go mod init github.com/<GITHUB-USERNAME>/<GITHUB-USERNAME>`)
-* Add missing modules (`go mod tidy`)
-* Copy all dependencies locally (`go mod vendor`)
-* Test to ensure everything is working (`make test`)
+* Cleanup old artifacts (`make init`)
 
 To edit the binding execution schedule, update the [config/cron.yaml](config/cron.yaml) file
 
