@@ -1,33 +1,65 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"context"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
+
+	daprd "github.com/dapr/go-sdk/service/http"
 )
 
-func main() {
-	r := gin.Default()
-	r.OPTIONS("/run", optionsHandler)
-	r.POST("/run", runHandler)
-	if err := r.Run(":8080"); err != nil {
-		panic(err)
+var (
+	logger  *log.Logger
+	address = getEnvVar("ADDRESS", ":8080")
+)
+
+func init() {
+	// configure logging
+	logger = log.New()
+	logger.Level = log.DebugLevel
+	logger.Out = os.Stdout
+	logger.Formatter = &log.JSONFormatter{
+		FieldMap: log.FieldMap{
+			log.FieldKeyTime:  "timestamp",
+			log.FieldKeyLevel: "severity",
+			log.FieldKeyMsg:   "message",
+		},
+		TimestampFormat: time.RFC3339Nano,
 	}
 }
 
-func runHandler(c *gin.Context) {
-	// TODO: do something interesting here
-	log.Printf("schedule received: %v", time.Now())
-	c.JSON(http.StatusOK, nil)
+func main() {
+	// create a Dapr service
+	s := daprd.NewService(address)
+
+	// add some input binding handler
+	err := s.AddInputBindingHandler("/run", runHandler)
+	if err != nil {
+		logger.Fatalf("error adding binding handler: %v", err)
+	}
+
+	// start the service
+	if err = s.Start(); err != nil && err != http.ErrServerClosed {
+		logger.Fatalf("error starting service: %v", err)
+	}
 }
 
-func optionsHandler(c *gin.Context) {
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Methods", "POST,OPTIONS")
-	c.Header("Access-Control-Allow-Headers", "authorization, origin, content-type, accept")
-	c.Header("Allow", "POST,OPTIONS")
-	c.Header("Content-Type", "application/json")
-	c.AbortWithStatus(http.StatusOK)
+func runHandler(ctx context.Context, in *daprd.BindingEvent) (out []byte, err error) {
+	logger.Debugf("Binding - Metadata:%s, Data:%v", in.Metadata, in.Data)
+
+	// TODO: do something with the cloud event data
+
+	return nil, nil
+}
+
+func getEnvVar(key, fallbackValue string) string {
+	if val, ok := os.LookupEnv(key); ok {
+		return strings.TrimSpace(val)
+	}
+	return fallbackValue
 }
