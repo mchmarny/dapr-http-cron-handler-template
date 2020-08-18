@@ -1,10 +1,5 @@
 module github.com/mchmarny/dapr-http-cron-handler-template
 
-go 1.14
+go 1.15
 
-replace github.com/dapr/go-sdk => github.com/mchmarny/go-sdk v0.8.17
-
-require (
-	github.com/dapr/go-sdk v0.0.0-00010101000000-000000000000
-	github.com/sirupsen/logrus v1.6.0
-)
+require github.com/dapr/go-sdk v0.8.1-0.20200818001455-d6de57c71a1d

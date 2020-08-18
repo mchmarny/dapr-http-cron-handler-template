@@ -2,55 +2,38 @@ package main
 
 import (
 	"context"
-	"time"
+	"log"
 
 	"net/http"
 	"os"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
-
+	"github.com/dapr/go-sdk/service/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 )
 
 var (
-	logger  *log.Logger
+	logger  = log.New(os.Stdout, "", 0)
 	address = getEnvVar("ADDRESS", ":8080")
 )
-
-func init() {
-	// configure logging
-	logger = log.New()
-	logger.Level = log.DebugLevel
-	logger.Out = os.Stdout
-	logger.Formatter = &log.JSONFormatter{
-		FieldMap: log.FieldMap{
-			log.FieldKeyTime:  "timestamp",
-			log.FieldKeyLevel: "severity",
-			log.FieldKeyMsg:   "message",
-		},
-		TimestampFormat: time.RFC3339Nano,
-	}
-}
 
 func main() {
 	// create a Dapr service
 	s := daprd.NewService(address)
 
 	// add some input binding handler
-	err := s.AddInputBindingHandler("/run", runHandler)
-	if err != nil {
+	if err := s.AddBindingInvocationHandler("run", runHandler); err != nil {
 		logger.Fatalf("error adding binding handler: %v", err)
 	}
 
 	// start the service
-	if err = s.Start(); err != nil && err != http.ErrServerClosed {
+	if err := s.Start(); err != nil && err != http.ErrServerClosed {
 		logger.Fatalf("error starting service: %v", err)
 	}
 }
 
-func runHandler(ctx context.Context, in *daprd.BindingEvent) (out []byte, err error) {
-	logger.Debugf("Binding - Metadata:%s, Data:%v", in.Metadata, in.Data)
+func runHandler(ctx context.Context, in *common.BindingEvent) (out []byte, err error) {
+	logger.Printf("Binding - Metadata:%v, Data:%v", in.Metadata, in.Data)
 
 	// TODO: do something with the cloud event data
 

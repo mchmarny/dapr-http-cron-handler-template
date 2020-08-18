@@ -21,19 +21,17 @@ build: tidy ## Builds local release binary
 
 debug: ## Runs uncompiled code it in Dapr in debug mode
 	dapr run --app-id $(SERVICE_NAME) \
-	     --protocol http \
-	     --app-port 8080 \
-	     --components-path ./config \
-	     --log-level debug \
-	     go run main.go
+	         --app-port 8080 \
+             --app-protocol http \
+	         --components-path ./config \
+	         go run main.go
 
 run: build ## Builds binary and runs it in Dapr
 	dapr run --app-id $(SERVICE_NAME) \
-		 --app-port 8080 \
-		 --protocol http \
-		 --port 3500 \
-         --components-path ./config \
-         bin/$(SERVICE_NAME) 
+	         --app-port 8080 \
+             --app-protocol http \
+	         --components-path ./config \
+             bin/$(SERVICE_NAME) 
 
 image: tidy ## Builds and publish docker image 
 	docker build -t "$(DOCKER_USERNAME)/$(SERVICE_NAME):$(RELEASE_VERSION)" .
