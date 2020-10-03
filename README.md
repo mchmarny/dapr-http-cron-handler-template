@@ -44,7 +44,6 @@ image                          Builds and publish docker image
 lint                           Lints the entire project
 tag                            Creates release tag
 clean                          Cleans up generated files
-init                           Resets go modules
 help                           Display available commands
 ```
 
