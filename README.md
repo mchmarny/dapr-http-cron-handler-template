@@ -1,9 +1,7 @@
-# dapr-http-cron-handler-template
-
-[![Test](https://github.com/dapr-templates/dapr-http-cron-handler-template/workflows/Test/badge.svg)](https://github.com/dapr-templates/dapr-http-cron-handler-template/actions?query=workflow%3ATest) ![Release](https://github.com/dapr-templates/dapr-http-cron-handler-template/workflows/Release/badge.svg?query=workflow%3ARelease) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/dapr-templates/dapr-http-cron-handler-template) [![Go Report Card](https://goreportcard.com/badge/github.com/dapr-templates/dapr-http-cron-handler-template)](https://goreportcard.com/report/github.com/dapr-templates/dapr-http-cron-handler-template)
+# dapr-http-cron-handler-template [![Go Report Card](https://goreportcard.com/badge/github.com/dapr-templates/dapr-http-cron-handler-template)](https://goreportcard.com/report/github.com/dapr-templates/dapr-http-cron-handler-template)
 
 
-## template usage 
+### template usage 
 
 * Click "Use this template" above and follow the wizard to select owner and name your new repo
 * When done, clone your new repo, and navigate into it
@@ -49,6 +47,6 @@ help                           Display available commands
 
 This project also includes GitHub actions in [.github/workflows](.github/workflows) that test on each `push` and build images and mark release on each `tag`. Other Dapr GitHub templates to accelerate Dapr development available [here](https://github.com/dapr/go-sdk/tree/master/service).
 
-## License
+### License
 
 This software is released under the [MIT](./LICENSE)
