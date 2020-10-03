@@ -1,6 +1,6 @@
 # dapr-http-cron-handler-template
 
-[![Test](https://github.com/mchmarny/dapr-http-cron-handler-template/workflows/Test/badge.svg)](https://github.com/mchmarny/dapr-http-cron-handler-template/actions?query=workflow%3ATest) ![Release](https://github.com/mchmarny/dapr-http-cron-handler-template/workflows/Release/badge.svg?query=workflow%3ARelease) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/mchmarny/dapr-http-cron-handler-template) [![Go Report Card](https://goreportcard.com/badge/github.com/mchmarny/dapr-http-cron-handler-template)](https://goreportcard.com/report/github.com/mchmarny/dapr-http-cron-handler-template)
+[![Test](https://github.com/dapr-templates/dapr-http-cron-handler-template/workflows/Test/badge.svg)](https://github.com/dapr-templates/dapr-http-cron-handler-template/actions?query=workflow%3ATest) ![Release](https://github.com/dapr-templates/dapr-http-cron-handler-template/workflows/Release/badge.svg?query=workflow%3ARelease) ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/dapr-templates/dapr-http-cron-handler-template) [![Go Report Card](https://goreportcard.com/badge/github.com/dapr-templates/dapr-http-cron-handler-template)](https://goreportcard.com/report/github.com/dapr-templates/dapr-http-cron-handler-template)
 
 
 ## template usage 
