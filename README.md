@@ -6,9 +6,13 @@
 ## template usage 
 
 * Click "Use this template" above and follow the wizard to select owner and name your new repo
-* Clone and navigate to your new repo (`git clone git@github.com:<USERNAME>/<REPO-NAME>.git && cd <REPO-NAME>`)
-* Initialize your project to set the package names and update imports (`make init`)
-* Write your subscription event handling logic 
+* When done, clone your new repo, and navigate into it
+* Initialize your project to set the package names 
+  * `go mod init github.com/<your-github-username>/<your-repo-name>`
+* Tidy things up and download modules
+  * `go mod tidy`
+* You're done, now "just" write your subscription event handling logic ;) 
+
 
 To edit the binding execution schedule, update the [config/cron.yaml](config/cron.yaml) file
 
