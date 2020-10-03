@@ -31,17 +31,16 @@ For more information about this binding see the [Dapr docs](https://github.com/d
 Common operations to help you bootstrap a Dapr HTTP services development in `go`:
 
 ```shell
-$ make help
+$ make
 tidy                           Updates the go modules and vendors all dependencies
 test                           Tests the entire project
+run                            Runs uncompiled code in Dapr
 build                          Builds local release binary
-debug                          Runs uncompiled code it in Dapr in debug mode
-run                            Builds binary and runs it in Dapr
 image                          Builds and publish docker image
 lint                           Lints the entire project
 tag                            Creates release tag
 clean                          Cleans up generated files
-reset                          Resets go modules
+init                           Resets go modules
 help                           Display available commands
 ```
 
